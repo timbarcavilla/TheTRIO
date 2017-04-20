@@ -9,6 +9,7 @@ HW #32 Getting Past the Velvet Rope
  * Implementation details:
  * To enqueue items in the ArrayPriorityQueue, we add an item such that the ArrayPriorityQueue remains sorted by the priority of the elements. We do this by adding the item to the end and then walking the element to the position it should be in.
  * To dequeue items, we simply remove and return the element at the end of the ArrayPriorityQueue. Since the ArrayPriorityQueue is sorted, the highest priority items are all at the end of the ArrayPriorityQueue.
+ * In the case of multiple items with the same priority, the first item of a given priority will be the first to be dequeue'd when that priority is the highest priority. That is, there is a FIFO-ness to items that are of the same priority.
  ********************************/
 import java.util.ArrayList;
 public class ArrayPriorityQueue implements PriorityQueue{
@@ -23,7 +24,7 @@ public class ArrayPriorityQueue implements PriorityQueue{
     public void add(Integer newInt){
         _queue.add(newInt);
 	int walk = _queue.size()-1;
-	while (walk != 0 && _queue.get(walk) > _queue.get(walk-1)){
+	while (walk != 0 && _queue.get(walk) >= _queue.get(walk-1)){
 	    _queue.set(walk,_queue.set(walk-1,_queue.get(walk)));
 	    walk--;
 	}
