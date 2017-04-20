@@ -19,31 +19,23 @@ public class ArrayPriorityQueue implements PriorityQueue{
 
     // Add item to end of ArrayList
     public void add(Integer newInt){
-        _queue.add( newInt );
+        _queue.add(newInt);
+	int walk = _queue.size()-1;
+	while (walk != 0 && _queue.get(walk) > _queue.get(walk-1)){
+	    _queue.set(walk,_queue.set(walk-1,_queue.get(walk)));
+	    walk--;
+	}
     }
 
     public boolean isEmpty(){ return _queue.size() == 0; }
 
     //
     public Integer peekMin(){
-        int min = _queue.get( 0 );
-        for( int i: _queue ){
-            if( i < min ){
-                min = i;
-            }
-        }
-        return min;
+        return _queue.get(_queue.size()-1);
     }
 
     public Integer removeMin(){
-        int minPos = 0;
-        for( int i = 0; i < _queue.size(); i++ ){
-            if( _queue.get( i ) < _queue.get( minPos ) ){
-                minPos = i;
-            }
-            if( _queue.get( minPos ) == 0 ){ break; }
-        }
-        return _queue.remove( minPos );
+        return _queue.remove( _queue.size()-1 );
     }
 
     public String toString(){
