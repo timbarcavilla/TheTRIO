@@ -1,13 +1,15 @@
 /*
-Team INSERT NAME HERE- Arif Rotkim, Tim Wang, Allan Wang
+Team The TRIO -- Arif Rotkim, Tim Wang, Allan Wang
 APCS2 PD4
 HW #32 Getting Past the Velvet Rope
 2017-4-19
 */
 
-/* Implementation details:
- *  
- */
+/********************************
+ * Implementation details:
+ * To enqueue items in the ArrayPriorityQueue, we add an item such that the ArrayPriorityQueue remains sorted by the priority of the elements. We do this by adding the item to the end and then walking the element to the position it should be in.
+ * To dequeue items, we simply remove and return the element at the end of the ArrayPriorityQueue. Since the ArrayPriorityQueue is sorted, the highest priority items are all at the end of the ArrayPriorityQueue.
+ ********************************/
 import java.util.ArrayList;
 public class ArrayPriorityQueue implements PriorityQueue{
 
@@ -17,7 +19,7 @@ public class ArrayPriorityQueue implements PriorityQueue{
         _queue = new ArrayList<Integer>();
     }
 
-    // Add item to end of ArrayList
+    // Add item such that the ArrayPriorityQueue will remain sorted by priority
     public void add(Integer newInt){
         _queue.add(newInt);
 	int walk = _queue.size()-1;
@@ -29,11 +31,10 @@ public class ArrayPriorityQueue implements PriorityQueue{
 
     public boolean isEmpty(){ return _queue.size() == 0; }
 
-    //
+    // Peek/remove the highest priority items by using the last item in the ArrayPriorityQueue
     public Integer peekMin(){
         return _queue.get(_queue.size()-1);
     }
-
     public Integer removeMin(){
         return _queue.remove( _queue.size()-1 );
     }
